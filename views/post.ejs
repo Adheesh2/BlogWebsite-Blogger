@@ -1,0 +1,33 @@
+<%- include("./partials/header") -%>
+<h1><%= postTitle %></h1>
+<p><%= postContent %></p>
+<br />
+<p>
+  <u>Published By</u>:<a href="/allposts/<%= user %>"><%= user %></a><br />
+  Published On: <%= date %>
+</p>
+<br><br>
+<h3>Comments</h3>
+<% if (auth) { %>
+<br>
+<form action="/comment/<%= postId %>" method="post">
+  <label for="comment-blog">Comment</label>
+  <textarea
+    id="comment-blog"
+    name="commentText"
+    cols="50"
+    rows="10"
+    placeholder="Enter Text..."
+    required
+  ></textarea>
+  <button class="btn btn-info" type="submit">Publish Comment</button>
+</form>
+<% } %> 
+<br>
+<% comments.forEach(comment => { %>
+    <p>By:<%= comment.username %><br>
+    <%= comment.comment %>
+    </p>
+<% }) %>
+
+<%- include("./partials/footer") -%>
